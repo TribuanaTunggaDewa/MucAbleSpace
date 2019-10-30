@@ -153,7 +153,7 @@ class customerScreen extends Component {
                             const customer = {
                                 name: this.state.customer,
                                 identity_number: this.state.id_card,
-                                phone_number: this.state.phone,D
+                                phone_number: this.state.phone
                             }
                             this.handleAddCustomer(customer)}}>
                             <Text style={{textAlign:'center'}}>Add</Text>

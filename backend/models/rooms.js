@@ -1,19 +1,15 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const rooms = sequelize.define('rooms', {
-    name: DataTypes.STRING,
-    order_id: DataTypes.INTEGER,
-    customer_id: DataTypes.INTEGER
+    name: DataTypes.STRING
   }, {});
   rooms.associate = function(models) {
     // associations can be defined here
-    rooms.belongsTo(models.customers, {
-      as: 'customerid',
-      foreignKey: 'customer_id'
-    }),
-    rooms.belongsTo(models.orders,{
-      as: 'orderid',
-      foreignKey: 'order_id'
+    rooms.belongsToMany(models.customers, {
+      through: models.orders,
+      as: "customers",
+      foreignKey: "room_id",
+      otherKey: "customer_id"
     })
   };
   return rooms;

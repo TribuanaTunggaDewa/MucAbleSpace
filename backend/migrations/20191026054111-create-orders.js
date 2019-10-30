@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      customer_id: {
+        type: Sequelize.INTEGER
+      },
+      room_id: {
+        type: Sequelize.INTEGER
+      },
       is_done: {
         type: Sequelize.BOOLEAN
       },
