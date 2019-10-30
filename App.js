@@ -26,6 +26,9 @@ import checkinScreen from './src/screens/checkinScreen'
 import customerScreen from './src/screens/customerScreen'
 import roomScreen from './src/screens/roomScreen'
 import settingScreen from './src/screens/settingScreen'
+import loginScreen from './src/screens/loginScreen'
+import { Provider } from 'react-redux'
+import store from './src/_redux/store'
 
 const tabContainer = createBottomTabNavigator({
   Checkin : checkinScreen,
@@ -34,7 +37,14 @@ const tabContainer = createBottomTabNavigator({
   Setting : settingScreen
 })
 
-const AppContainer = createAppContainer(tabContainer)
+const switchContainer = createSwitchNavigator({
+    Checkin: tabContainer,
+    login: loginScreen,
+},{
+  initialRouteName: 'Checkin'
+})
+
+const AppContainer = createAppContainer(switchContainer)
 
 
 class App extends Component {
@@ -42,7 +52,9 @@ class App extends Component {
 
   render(){
     return(
-      <AppContainer />
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
     )
   }
 }
