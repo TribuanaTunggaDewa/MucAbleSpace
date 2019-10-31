@@ -13,7 +13,8 @@ import {
 } from 'react-native'
 import {Input} from 'native-base'
 import axios from 'axios'
-import {ip} from '../source/domain'
+import {ip} from '../source/domain' 
+import styles from '../source/style.js'
 import AsyncStorage from '@react-native-community/async-storage'
 
 class loginScreen extends Component {
@@ -26,6 +27,21 @@ class loginScreen extends Component {
         }
     }
 
+    async componentDidMount(){
+        await this.SessionTokenCheck()
+    }
+
+    async SessionTokenCheck(){
+        try{
+            const Tokenize = await AsyncStorage.getItem('uToken')
+            if(Tokenize !==null){
+                return this.props.navigation.navigate('Checkin')
+            }
+        }catch(error){
+            console('U must login First')
+        }
+    }
+
     login = async () => {
         try{
             let temp= {
@@ -34,10 +50,10 @@ class loginScreen extends Component {
             }
             await axios.post(`${ip}/api/v2/login`, temp)
             .then((response)=>{
+                console.log(response)
                 if(typeof response.data.token !== 'undefined'){
                     AsyncStorage.setItem('uToken', response.data.token)
-                    AsyncStorage.setItem('User', JSON.stringify(response.data.user.id))
-                    console.log(response.data.user)
+                    console.log(response.data.token)
                     this.props.navigation.navigate('Customer')
                 }
             })
@@ -51,13 +67,15 @@ class loginScreen extends Component {
     render(){
         return(
         <View>
-            <Text>username</Text>
-            <Input  style={{borderWidth:2, width:270, height: 200}} onChangeText={(username)=>{this.setState({username})}} value={this.state.username} />           
-            <Text>password</Text>
-            <Input  style={{borderWidth:2, width:270, height: 200}} onChangeText={(password)=>{this.setState({password})}} value={this.state.password} />
-            <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.login()}>
-                            <Text style={{textAlign:'center'}}>Login</Text>
+          <View style={styles.content}>
+            <Text style={styles.label}>username</Text>
+            <Input  style={styles.Input} onChangeText={(username)=>{this.setState({username})}} value={this.state.username} />           
+            <Text style={styles.label}>password</Text>
+            <Input  style={styles.Input} onChangeText={(password)=>{this.setState({password})}} value={this.state.password} />
+            <TouchableOpacity style={styles.oneButton} onPress={()=>this.login()}>
+                            <Text style={styles.TextButton}>Login</Text>
             </TouchableOpacity>
+          </View>
         </View>
         )
     }

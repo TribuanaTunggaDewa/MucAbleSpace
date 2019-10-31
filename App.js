@@ -29,19 +29,68 @@ import settingScreen from './src/screens/settingScreen'
 import loginScreen from './src/screens/loginScreen'
 import { Provider } from 'react-redux'
 import store from './src/_redux/store'
+import Icon from 'react-native-vector-icons/Feather'
 
 const tabContainer = createBottomTabNavigator({
-  Checkin : checkinScreen,
-  Customer: customerScreen,
-  Room    : roomScreen,
-  Setting : settingScreen
+  Checkin : {
+    screen: checkinScreen,
+    navigationOptions:{
+      tabBarLabel: 'Checkin',
+      tabBarIcon: ({tintColor}) => <Icon name='check-circle' size={30} color={tintColor} />,
+      tabBarOptions:{
+        activeTintColor: 'white',
+        inactiveBackgroundColor: '#757575',
+        activeBackgroundColor: '#D7CCC8'
+      }
+      
+    }
+  },
+  Customer: {
+    screen: customerScreen,
+    navigationOptions:{
+      tabBarLabel: 'Customer',
+      tabBarIcon: ({tintColor}) => <Icon name='users' size={30} color={tintColor} />,
+      tabBarOptions:{
+        activeTintColor: 'white',
+        inactiveBackgroundColor: '#757575',
+        activeBackgroundColor: '#D7CCC8'
+      }
+      
+    }
+  },
+  Room    : {
+    screen: roomScreen,
+    navigationOptions:{
+      tabBarLabel: 'Room',
+      tabBarIcon: ({tintColor}) => <Icon name='box' size={30} color={tintColor} />,
+      tabBarOptions:{
+        activeTintColor: 'white',
+        inactiveBackgroundColor: '#757575',
+        activeBackgroundColor: '#D7CCC8'
+      }
+      
+    }
+  },
+  Setting : {
+    screen: settingScreen,
+    navigationOptions:{
+      tabBarLabel: 'Setting',
+      tabBarIcon: ({tintColor}) => <Icon name='settings' size={30} color={tintColor} />,
+      tabBarOptions:{
+        activeTintColor: 'white',
+        inactiveBackgroundColor: '#757575',
+        activeBackgroundColor: '#D7CCC8'
+      }
+      
+    }
+  }
 })
 
 const switchContainer = createSwitchNavigator({
     Checkin: tabContainer,
     login: loginScreen,
 },{
-  initialRouteName: 'Checkin'
+  initialRouteName: 'login'
 })
 
 const AppContainer = createAppContainer(switchContainer)

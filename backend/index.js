@@ -20,18 +20,18 @@ app.group('/api/v2', (routes)=>{
     routes.post('/login',  adminController.login)
     routes.post('/register', adminController.register)
 
-    
-    routes.get('/checkin', checkinController.index)
+
+    routes.get('/checkin', authenticated, checkinController.index)
     routes.post('/checkin', checkinController.addCheckin)
     routes.put('/orders', checkinController.checkout)
 
-    routes.get('/customers', customerController.index)
-    routes.post('/customer', customerController.addCustomer)
-    routes.put(`/customer/:id`, customerController.editCustomer)
+    routes.get('/customers', authenticated, customerController.index)
+    routes.post('/customer', authenticated, customerController.addCustomer)
+    routes.put(`/customer/:id`, authenticated, customerController.editCustomer)
 
 
-    routes.get('/rooms', roomController.index)
-    routes.post('/room', roomController.addRoom)
+    routes.get('/rooms', authenticated, roomController.index)
+    routes.post('/room', authenticated, roomController.addRoom)
     routes.put('/room/:id', roomController.editRoom)
 
 

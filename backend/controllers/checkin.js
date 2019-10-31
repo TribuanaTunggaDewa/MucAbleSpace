@@ -24,14 +24,12 @@ exports.addCheckin= (req, res) => {
             model : models.customers,
             as:"customers",
             attributes: {exclude: ['createdAt', 'updatedAt']},
-          },
-           through: {
+            through: {
               model: models.orders,
               as: "orders",
               attributes: {exclude: ['createdAt', 'updatedAt']}
-          },
-                                
-                attributes: {exclude: ['createdAt', 'updatedAt']}
+              }
+          }
             }).then(data => {
         res.send(data)
         })
@@ -39,7 +37,7 @@ exports.addCheckin= (req, res) => {
 }
 
 exports.checkout= (req, res) => {
-    models.orders.update({...req.body, is_done: true, is_booked:false},
+    models.orders.update(req.body,
             {where: {room_id : req.body.room_id,
                      customer_id : req.body.customer_id}}).
             then(()=>{
@@ -47,16 +45,14 @@ exports.checkout= (req, res) => {
                     model : models.customers,
                     as:"customers",
                     attributes: {exclude: ['createdAt', 'updatedAt']},
-                  },
-                   through: {
+                    through: {
                       model: models.orders,
                       as: "orders",
                       attributes: {exclude: ['createdAt', 'updatedAt']}
-                  },
-                                        
-                        attributes: {exclude: ['createdAt', 'updatedAt']}
-                    }).then(data => {
-                res.send(data)
-                })
+                      }
+                  }
+                        }).then(data => {
+            res.send(data)
+            })
             })
 }
