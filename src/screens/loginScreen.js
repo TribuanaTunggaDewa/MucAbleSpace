@@ -66,16 +66,24 @@ class loginScreen extends Component {
 
     render(){
         return(
-        <View>
-          <View style={styles.content}>
-            <Text style={styles.label}>username</Text>
-            <Input  style={styles.Input} onChangeText={(username)=>{this.setState({username})}} value={this.state.username} />           
-            <Text style={styles.label}>password</Text>
-            <Input  style={styles.Input} onChangeText={(password)=>{this.setState({password})}} value={this.state.password} />
-            <TouchableOpacity style={styles.oneButton} onPress={()=>this.login()}>
-                            <Text style={styles.TextButton}>Login</Text>
-            </TouchableOpacity>
-          </View>
+        <View >
+            <View style={styles.Container}>
+            <Text style={[styles.Title,{marginTop:20}]}>MucAbleSpace</Text>
+            <Image style={{width:150, height:150, borderRadius: 100, marginTop:10}} source={require('../source/images/Free_Sample_By_Wix.png')} />
+                <View style={styles.Content}>
+                    <View style={styles.subContent}>
+                       <View style={styles.Card}>
+                            <Text style={styles.label}>username</Text>
+                            <Input  style={styles.input} onChangeText={(username)=>{this.setState({username})}} value={this.state.username} />           
+                            <Text style={styles.label}>password</Text>
+                            <Input  style={styles.input} onChangeText={(password)=>{this.setState({password})}} value={this.state.password} secureTextEntry={true} />
+                                <TouchableOpacity style={[styles.Button,{alignSelf:'center'}]} onPress={()=>this.login()}>
+                                    <Text style={[styles.labelButton,{alignSelf:'center', textAlignVertical:'center'}]}>Login</Text>
+                                </TouchableOpacity>
+                       </View>
+                    </View>
+                </View>
+            </View>
         </View>
         )
     }

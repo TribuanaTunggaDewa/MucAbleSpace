@@ -66,42 +66,46 @@ class roomScreen extends Component {
 
     render(){
         return(
-            <View>
             <ScrollView>
-            <Header style={{backgroundColor:'#757575'}}>
-                <Text style={styles.TextButton}>ROOMS</Text>
+            <View>
+            <Header style={styles.header}>
+                <Text style={styles.Title}>ROOMS</Text>
             </Header>
-            <View style={{flexDirection:'column'}}> 
-            <FlatList
-            data={this.props.room.room}
-            numColumns={3}
-            renderItem={({item})=>{
-                return(   
-                        <TouchableOpacity style={{margin:10, borderWidth: 1, width: 100, height: 100, justifyContent:'center', backgroundColor:'#D7CCC8'}} onLongPress={()=>this.setState({modal_edit_status:true}, this.setState({room: item.name, room_id:item.id}))} >
-                            <Text style={{textAlign:'center'}}>
-                                {item.name} 
-                            </Text>
-                        </TouchableOpacity>          
-                    )
-                }}
-            />
-              
-       
-                        <TouchableOpacity style={{margin:10, borderWidth: 1, width: 100, height: 100, justifyContent:'center', backgroundColor:'#D7CCC8'}} onPress={()=>this.setState({modal_status:true})} >
-                            <Text style={{textAlign:'center'}}>
-                                Add++
-                            </Text>
-                        </TouchableOpacity>
-            </View>                 
-        
-            </ScrollView>
-                       
+            <View style={styles.Container}>
+                <View style={styles.content}>
+                    <FlatList
+                    data={[...this.props.room.room, {name: '+Add'}]}
+                    numColumns={3}
+                    renderItem={({item})=>{
+                         if(item.name === '+Add'){
+                            return(   
+                              
+                                <TouchableOpacity style={[styles.room, styles.roomAv, {backgroundColor: '#00d8d6'}]} onPress={()=>this.setState({modal_status:true})} >
+                                    <Text style={[styles.label,{alignSelf:'center'}]}>
+                                        {item.name} 
+                                    </Text>
+                                </TouchableOpacity>          
+                            )
+                         }else{
+                            return(   
+                              
+                                <TouchableOpacity style={[styles.room, styles.roomAv]} onLongPress={()=>this.setState({modal_edit_status:true}, this.setState({room: item.name, room_id:item.id}))} >
+                                    <Text style={[styles.label, {alignSelf:'center'}]}>
+                                        {item.name} 
+                                    </Text>
+                                </TouchableOpacity>          
+                            )
+                         }
+                        }}
+                    />
+                </View>
+            </View>
             <Modal visible={this.state.modal_edit_status}>
-                <View style={[styles.content,{bottom: 50}]}>
-                    <Text style={{textAlign:'center'}}>Edit Room</Text>
+                <View >
+                    <Text >Edit Room</Text>
                     <Text>Name{this.state.room_id}</Text>
-                    <Input style={styles.Input} onChangeText={(room)=>{this.setState({room})}} value={this.state.room} />           
-                    <View style={{flexDirection:'row'}}>
+                    <Input onChangeText={(room)=>{this.setState({room})}} value={this.state.room} />           
+                    <View>
                         <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.setState({modal_edit_status:false})}>
                             <Text style={{textAlign:'center'}}>Cancel</Text>
                         </TouchableOpacity>
@@ -126,10 +130,9 @@ class roomScreen extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </Modal>
-
+            </Modal>                        
             </View>
-        
+            </ScrollView>
 
         )
     }

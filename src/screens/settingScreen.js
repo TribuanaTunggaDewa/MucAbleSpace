@@ -44,8 +44,8 @@ class settingScreen extends Component {
     render(){
         return(
             <View>
-            <Header style={{backgroundColor:'#757575'}}>
-                <Text style={styles.TextButton}>ROOMS</Text>
+            <Header style={styles.header}>
+                <Text style={styles.TextButton}>Setting</Text>
             </Header>
             <View style={{flexDirection:'row'}}>
                 <View style={{margin:10, width: 340, height: 100, justifyContent:'center', flexDirection:'row'}}>

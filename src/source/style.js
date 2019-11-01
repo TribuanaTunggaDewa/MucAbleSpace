@@ -1,142 +1,88 @@
 import {StyleSheet} from 'react-native'
 
-const color = '#009688'
-const buttonColor = '#03A9F4'
+const FontColor = '#2c3e50'
+const CardColor = '#ecf0f1'
+const TitleSize = 36
+const labelSize = 18
+const borderColor = '#2ecc71'
+const buttonColor = '#00d8d6'
 
 export default StyleSheet.create({
+  
+    Container: {
+        backgroundColor:'#9fdfcd',
+        alignItems:'center',
+    },
+    Content:{
+        width:350,
     
-    input: {
-        width: 100
     },
-    container:{
-        padding: 10,
-        alignItems: 'center'
+    subContent:{
+        alignItems:'center'
     },
-    content:{
-        margin: 10,
-        padding: 10,
-        backgroundColor : '#BDBDBD',
-        height: 265,
-        bottom: -150,
-        width: 300,
-        alignSelf:'center',
-        borderRadius: 5
+    Card:{
+        marginTop: 30,
+        width:300,
+        height:284,
+        padding: 30,
+        backgroundColor: CardColor,
+        opacity:0.7,
+        borderRadius: 20,
+        marginBottom: 80
     },
-    imagelist:{
-        margin:10, 
-        borderWidth: 1,
-        width: 340,
-        height: 100, 
-        justifyContent:'flex-start', 
-        flexDirection:'row',
-        backgroundColor: '#BDBDBD',
-        borderRadius: 5
-        
+    CardImage:{
+        marginTop: 25,
+        width:350,
+        height:150,
+        padding: 30,
+        backgroundColor: CardColor,
+        borderRadius: 20,
+        flexDirection: 'row'
+    },
+    Title:{
+        fontSize: TitleSize,
+        color: FontColor
     },
     label:{
-        fontSize: 19,
-        color: '#212121'
+        fontSize: labelSize,
+        color: FontColor,
+        marginTop:10
     },
-    text:{
-        fontSize: 16,
-        color: '#212121',
-        marginStart:20
+    labelButton:{
+        fontSize: labelSize,
+        color: FontColor,
+        marginTop: 5
     },
-    Input:{
-        backgroundColor: 'white',
-        marginTop: 12
+    input:{
+        borderWidth: 1,
+        borderColor: borderColor,
+        marginTop: 10
     },
-    loginTitle:{
-        fontSize: 28,
-        fontStyle: 'normal',
-        textAlign:'center',
-        marginTop: 40
-    
-    },
-    loginSubtitle:{
-        textAlign:'center'
-    },
-    loginCard:{
-        marginTop: 30,
-        backgroundColor:'white',
-        width: 270,
-        alignSelf:'center'
-    },
-    oneButton:{
+    Button:{
+        width: 100,
+        height: 35,
         backgroundColor: buttonColor,
-        width: 235,
-        height:45,
-        alignSelf: 'center',
-        margin: 20
+        marginTop: 20,
+        borderRadius: 30
+
     },
-    oneButtonDanger:{
-        backgroundColor: '#F44336',
-        width: 270,
-        height:50,
-        alignSelf: 'center'
+    header : {
+        backgroundColor: '#2ecc71'
     },
-    splitButtonDanger:{
-        backgroundColor: '#F44336',
-        height: 50,
-        marginStart: 11,
-        textAlignVertical: 'center'
-    },
-    TextButton:{
-        fontSize:18,
-        textAlign:'center',
+    room:{
+        margin:10,
+        width: 100,
+        height: 100,
         justifyContent:'center',
-        paddingTop: 10,
-        color:'white'
-
-},header:{
-    backgroundColor: color
-},secondHeader:{
-    backgroundColor: '#00796B'
-},
-
-
-buttoncolor :{
-    backgroundColor: buttonColor
-},imageBanner:{
-        width :400,
-        height:170
+        borderRadius: 20,
+        elevation: 2
     },
-      splitButton:{
-        backgroundColor: buttonColor,
-        marginStart: 11,
-
+    roomAv:{
+        backgroundColor: 'white'
     },
-    textList:{
-        marginStart: 30
-    },
-    circleBorder : {
-        height:200,
-        width:200, 
-        borderRadius: 200/ 2,
-        borderWidth:4,
-        borderColor: 'black',
-        alignSelf:'center'
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        justifyContent: 'center'
-    },
-    TouchableOpacityStyle: {
-      position: 'absolute',
-      width: 50,
-      height: 50,
-      alignItems: 'center',
-      justifyContent: 'center',
-      right: 30,
-      bottom: 10,
-    },
-    FloatingButtonStyle: {
-      resizeMode: 'contain',
-      width: 50,
-      height: 50,
-      //backgroundColor:'black'
+    roomDiv:{
+        backgroundColor:'black'
     }
-   
+    
 
 })

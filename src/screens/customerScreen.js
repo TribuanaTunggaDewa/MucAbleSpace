@@ -89,14 +89,17 @@ class customerScreen extends Component {
         return(
               <ScrollView>
                 <View>
-                <Header style={{backgroundColor:'#757575'}}>
-                <Text style={styles.TextButton}>CUSTOMERS</Text>
+                <Header style={styles.header}>
+                <Text style={styles.Title}>CUSTOMERS</Text>
                 </Header>
-                <FlatList
+                <View style={styles.Container}>
+                    <View style={styles.Content}>
+
+                    <FlatList
                     data={this.props.customer.customer}
                     renderItem={({item})=>{
                         return(
-                                <TouchableOpacity style={styles.imagelist} onLongPress={()=>{
+                                <TouchableOpacity style={styles.CardImage} onLongPress={()=>{
                                     this.setState({modal_edit_status: true,
                                                    customer_id: item.id,
                                                    customer: item.name,
@@ -105,28 +108,27 @@ class customerScreen extends Component {
                                     
 
                                 }}>
-                                    <Image style={{left:0, top: 10, borderWidth: 2, width: 70, height: 70, justifyContent:'center', borderRadius:100}} source={{uri: item.image}} />
+                                    <Image style={{left:-20, top: 10, borderWidth: 2, width: 70, height: 70, justifyContent:'center', borderRadius:100}} source={{uri: item.image}} />
                
-                                    <View style={{ justifyContent:'center'}}>
-                                        <Text style={styles.text}>
-                                            {item.identity_number}
+                                    <View style={{ marginStart: 1}}>
+                                        <Text style={styles.label}>
+                                            Identity Number :{item.identity_number}
                                         </Text>
-                                        <Text style={styles.text}>
-                                            {item.name}
+                                        <Text style={styles.label}>
+                                            Name            :{item.name}
                                         </Text>
-                                        <Text style={styles.text}>
-                                            {item.phone_number}
+                                        <Text style={styles.label}>
+                                            Phone           :{item.phone_number}
                                         </Text>
                                     </View>
                                 </TouchableOpacity>                 
                         )
                     }}
                 />
-                <View style={{justifyContent:'center'}}>
-                <TouchableOpacity style={styles.oneButton} onPress={()=>this.setState({modal_status:true})}>
-                    <Text style={styles.TextButton}>Add</Text>
+                <TouchableOpacity style={[styles.Button,{alignSelf:'center'}]} onPress={()=>this.setState({modal_status:true})}>
+                    <Text style={[styles.labelButton,{alignSelf:'center'}]}>Add</Text>
                 </TouchableOpacity>
-                </View>
+                   
 
                 <Modal visible={this.state.modal_edit_status}>
                 <View style={[styles.content,{bottom: 50, height: 280}]}>
@@ -181,6 +183,8 @@ class customerScreen extends Component {
                     </View>
                     </View>
                 </Modal>
+                </View>
+                </View>
                 </View>
               </ScrollView>
           

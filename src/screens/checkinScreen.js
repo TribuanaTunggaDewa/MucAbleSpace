@@ -34,7 +34,6 @@ class checkinScreen extends Component {
             customer_id: 0,
             customer: '',
             identity_number:'',
-            customers: [],
             checkins:[],
             duration: 0,
             Token: '',
@@ -97,10 +96,13 @@ class checkinScreen extends Component {
         return(
             <ScrollView>
             <View>
-            <Header style={{backgroundColor:'#757575'}}>
-                <Text style={styles.TextButton}>CHECKIN</Text>
+            <Header style={styles.header}>
+                <Text style={styles.Title}>CHECKIN</Text>
             </Header>
-            <FlatList
+            
+            <View style={styles.Container}>
+                <View style={styles.Content}>
+                <FlatList
             data={this.props.checkin.checkin}
             numColumns={3}
             renderItem={({item})=>{
@@ -136,7 +138,7 @@ class checkinScreen extends Component {
                     // }
                     if(item.customers.some(cust => cust.orders.is_done === false && cust.orders.is_booked === true)){
                         return(  
-                            <TouchableOpacity style={{margin:10, borderWidth: 2, width: 100, height: 100, justifyContent:'center', backgroundColor:'gray'}} onLongPress={()=>{
+                            <TouchableOpacity style={[styles.room, styles.roomDiv]} onLongPress={()=>{
                                 this.setState({modal_checkout_status: true, room_id: item.id, room_name: item.name, customer_id: item.customers[item.customers.length-1].id,
                                 customer : item.customers[item.customers.length-1].name, identity_number: item.customers[item.customers.length-1].identity_number,    
                             })
@@ -165,9 +167,9 @@ class checkinScreen extends Component {
                     )
                     }else{
                         return(  
-                            <TouchableOpacity style={{margin:10, borderWidth: 1, width: 100, height: 100, justifyContent:'center', backgroundColor:'#8BC34A'}} onLongPress={()=>{
+                            <TouchableOpacity style={[styles.room, styles.roomAv]} onLongPress={()=>{
                                 this.setState({modal_checkin_status: true, room_id: item.id, room_name: item.name, customers: this.props.customer.customer, checkins:item})}}>
-                                <Text style={{textAlign:'center'}}>
+                                <Text style={[styles.label,{alignSelf:'center'}]}>
                                     {item.name}
                                 </Text>
                             </TouchableOpacity>
@@ -177,10 +179,10 @@ class checkinScreen extends Component {
                     }
                 }else{
                     return(  
-                        <TouchableOpacity style={{margin:10, borderWidth: 1, width: 100, height: 100, justifyContent:'center', backgroundColor:'#8BC34A'}} onLongPress={()=>{
+                        <TouchableOpacity style={[styles.room,styles.roomAv]} onLongPress={()=>{
                             this.setState({modal_checkin_status: true, room_id: item.id, room_name:item.name, customers: this.props.customer.customer, checkins:item}
                             )}}>
-                            <Text style={{textAlign:'center'}}>
+                            <Text style={[styles.label,{alignSelf:'center'}]}>
                                 {item.name}
                             </Text>
                         </TouchableOpacity>
@@ -207,7 +209,8 @@ class checkinScreen extends Component {
                                 }}
                           
                             >
-                            {this.state.customers.map((val,index)=>{
+                                 <Picker.Item label='Pilih Customer' value={0} style={{borderWidth:2}}  />
+                            {this.props.customer.customer.map((val,index)=>{
                                 return(
                                     <Picker.Item label={val.identity_number+'  '+val.name} value={val.id} key={index} style={{borderWidth:2}}  />
                                 )
@@ -282,6 +285,8 @@ class checkinScreen extends Component {
                             </View>
                         </Modal>
                         
+                </View>
+            </View>
                 
             </View>
             </ScrollView>

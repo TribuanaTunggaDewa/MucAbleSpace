@@ -31,6 +31,10 @@ import { Provider } from 'react-redux'
 import store from './src/_redux/store'
 import Icon from 'react-native-vector-icons/Feather'
 
+
+const inactiveBg = '#27ae60'
+const activeBg = '#2ecc71' 
+
 const tabContainer = createBottomTabNavigator({
   Checkin : {
     screen: checkinScreen,
@@ -39,8 +43,8 @@ const tabContainer = createBottomTabNavigator({
       tabBarIcon: ({tintColor}) => <Icon name='check-circle' size={30} color={tintColor} />,
       tabBarOptions:{
         activeTintColor: 'white',
-        inactiveBackgroundColor: '#757575',
-        activeBackgroundColor: '#D7CCC8'
+        inactiveBackgroundColor: inactiveBg,
+        activeBackgroundColor: activeBg
       }
       
     }
@@ -52,8 +56,8 @@ const tabContainer = createBottomTabNavigator({
       tabBarIcon: ({tintColor}) => <Icon name='users' size={30} color={tintColor} />,
       tabBarOptions:{
         activeTintColor: 'white',
-        inactiveBackgroundColor: '#757575',
-        activeBackgroundColor: '#D7CCC8'
+        inactiveBackgroundColor: inactiveBg,
+        activeBackgroundColor: activeBg
       }
       
     }
@@ -65,8 +69,8 @@ const tabContainer = createBottomTabNavigator({
       tabBarIcon: ({tintColor}) => <Icon name='box' size={30} color={tintColor} />,
       tabBarOptions:{
         activeTintColor: 'white',
-        inactiveBackgroundColor: '#757575',
-        activeBackgroundColor: '#D7CCC8'
+        inactiveBackgroundColor: inactiveBg,
+        activeBackgroundColor: activeBg
       }
       
     }
@@ -78,8 +82,8 @@ const tabContainer = createBottomTabNavigator({
       tabBarIcon: ({tintColor}) => <Icon name='settings' size={30} color={tintColor} />,
       tabBarOptions:{
         activeTintColor: 'white',
-        inactiveBackgroundColor: '#757575',
-        activeBackgroundColor: '#D7CCC8'
+        inactiveBackgroundColor: inactiveBg,
+        activeBackgroundColor: activeBg
       }
       
     }
