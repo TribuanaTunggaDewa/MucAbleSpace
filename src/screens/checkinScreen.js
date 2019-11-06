@@ -19,6 +19,8 @@ import moment from 'moment'
 import CountDown from 'react-native-countdown-component'
 import AsyncStorage from '@react-native-community/async-storage'
 import styles from '../source/style'
+import style from '../source/style'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 
 class checkinScreen extends Component {
@@ -144,11 +146,11 @@ class checkinScreen extends Component {
                             })
                             }}>
                                 <CountDown
-                                    until={this.state.duration * 60}
+                                    until={item.customers[item.customers.length-1].orders.duration* 60}
                                     timeToShow= {['M','S']}
                                     onFinish={() => {
                                         const checkout = {
-                                            customer_id: this.state.customer_id,
+                                            customer_id: item.customers[item.customers.length-1].id,
                                             room_id: item.id,
                                             is_done: true,
                                             is_booked: false,
@@ -195,12 +197,15 @@ class checkinScreen extends Component {
 
        
                     <Modal visible={this.state.modal_checkin_status}>
-                        <View style={[styles.content,{bottom: 50}]}>
-                            <Text style={{textAlign:'center'}}>Add Checkin</Text>
-                            <Text>Room Name</Text>
+                        <View style={[styles.Card,{height:410}]}> 
+                        <TouchableOpacity style={{backgroundColor:'red', borderRadius:100, width:35, height: 35}} onPress={()=>this.setState({modal_checkin_status:false})}>
+                            <Text style={[styles.labelButton,{textAlign:'center'}]}>X</Text>
+                        </TouchableOpacity>
+                            <Text style={[styles.label,{textAlign:'center'}]}>Add Checkin</Text>
+                            <Text style={styles.label}>Room Name</Text>
                             <Input  style={{borderWidth:2, height:20, backgroundColor:'gray'}} value={this.state.room_name} disabled />          
                             <Text>Customer</Text>
-                            <Picker
+                            <Picker style={styles.label}
                                 mode='dropdown'
                                 style={{height:30}}
                                 selectedValue={(this.state.customer_id)}
@@ -216,13 +221,11 @@ class checkinScreen extends Component {
                                 )
                             })}
                             </Picker>
-                            <Text>Duration (minutes)</Text>
-                            <Input style={styles.Input} onChangeText={(duration)=>{this.setState({duration})}} value={this.state.duration} />
-                            <View style={{flexDirection:'row'}}>
-                                <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.setState({modal_checkin_status:false})}>
-                                    <Text style={{textAlign:'center'}}>Cancel</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>{
+                            <Text style={styles.label}>Duration (minutes)</Text>
+                            <Input style={styles.input} onChangeText={(duration)=>{this.setState({duration})}} value={this.state.duration} />
+                            <View style={{flexDirection:'row', justifyContent:'center'}}>
+                              
+                                <TouchableOpacity style={[styles.Button,{alignSelf:'center'}]} onPress={()=>{
                                     const checkin = {
                                         customer_id: this.state.customer_id,
                                         room_id: this.state.room_id,
@@ -234,23 +237,31 @@ class checkinScreen extends Component {
                                     if(this.state.checkins.customers.some(cust => cust.orders.customer_id == checkin.customer_id && cust.orders.room_id == checkin.room_id)){
                                         this.handleCheckout(checkin, this.state.Token)
                                     }else{
-                                        this.handleAddcheckin(checkin, this.state.Token)
+                                        if(checkin.customer_id === 0 || checkin.duration == 0){
+                                            alert('fill customer and duration first !!')
+                                        }else{
+                                            this.handleAddcheckin(checkin, this.state.Token)
+                                        }
+                                        
                                     }
                                     
                                    
                                     
                                     
                                 }}>
-                                    <Text style={{textAlign:'center'}}>Checkin</Text>
+                                    <Text style={[styles.labelButton, {textAlign:'center'}]}>Checkin</Text>
                                 </TouchableOpacity>
                             </View>
                             </View>
                         </Modal>
 
                         <Modal visible={this.state.modal_checkout_status}>
-                        <View style={[styles.content,{bottom: 50}]}>
-                            <Text style={{textAlign:'center'}}>Checkout</Text>
-                            <Text>Room Name</Text>
+                        <View style={[styles.Card,{height: 390}]}>
+                            <TouchableOpacity style={{backgroundColor:'red', borderRadius:100, width:35, height: 35}} onPress={()=>this.setState({modal_checkout_status :false})}>
+                                <Text style={[styles.labelButton,{textAlign:'center'}]}>X</Text>
+                            </TouchableOpacity>
+                            <Text style={[styles.label,{textAlign:'center'}]}>Checkout</Text>
+                            <Text style={styles.label} >Room Name</Text>
                             <Input  style={{borderWidth:2, height:20, backgroundColor:'gray'}} value={this.state.room_name} disabled />          
                             <Text>Customer</Text>
                             <Picker
@@ -260,11 +271,8 @@ class checkinScreen extends Component {
                             >
                             <Picker.Item label={this.state.identity_number+'  '+this.state.customer} value={this.state.customer_id}  style={{borderWidth:2}}  /> 
                             </Picker>
-                            <View style={{flexDirection:'row'}}>
-                                <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.setState({modal_checkout_status                                                                                                                                                                                                                                                                                                                                  :false})}>
-                                    <Text style={{textAlign:'center'}}>Cancel</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>{
+                            <View style={{flexDirection:'row', justifyContent:'center'}}>
+                                <TouchableOpacity style={[styles.Button, {backgroundColor:'red', alignSelf:'center'}]} onPress={()=>{
                                     const checkout = {
                                         customer_id: this.state.customer_id,
                                         room_id: this.state.room_id,
@@ -279,7 +287,7 @@ class checkinScreen extends Component {
                                   
                                     
                                 }}>
-                                    <Text style={{textAlign:'center'}}>Checkout</Text>
+                                    <Text style={[styles.labelButton, {textAlign:'center'}] }>Checkout</Text>
                                 </TouchableOpacity>
                             </View>
                             </View>

@@ -80,7 +80,7 @@ class roomScreen extends Component {
                          if(item.name === '+Add'){
                             return(   
                               
-                                <TouchableOpacity style={[styles.room, styles.roomAv, {backgroundColor: '#00d8d6'}]} onPress={()=>this.setState({modal_status:true})} >
+                                <TouchableOpacity style={[styles.room, styles.roomAv, {backgroundColor: '#00d8d6'}]} onPress={()=>this.setState({modal_status:true, room: '', room_id:0})} >
                                     <Text style={[styles.label,{alignSelf:'center'}]}>
                                         {item.name} 
                                     </Text>
@@ -101,32 +101,33 @@ class roomScreen extends Component {
                 </View>
             </View>
             <Modal visible={this.state.modal_edit_status}>
-                <View >
-                    <Text >Edit Room</Text>
-                    <Text>Name{this.state.room_id}</Text>
-                    <Input onChangeText={(room)=>{this.setState({room})}} value={this.state.room} />           
-                    <View>
-                        <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.setState({modal_edit_status:false})}>
-                            <Text style={{textAlign:'center'}}>Cancel</Text>
+                <View style={styles.Card}>
+                <TouchableOpacity style={{backgroundColor:'red', borderRadius:100, width:35, height: 35}} onPress={()=>this.setState({modal_edit_status:false})}>
+                            <Text style={[styles.labelButton,{textAlign:'center'}]}>X</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.handleEditRoom(this.state.room, this.state.room_id, this.state.Token)}>
-                            <Text style={{textAlign:'center'}}>Edit</Text>
+                    <Text style={[styles.labelButton, {textAlign:'center'}]}>Edit Room</Text>
+                    <Text style={styles.label}>Name{this.state.room_id}</Text>
+                    <Input style={styles.input} onChangeText={(room)=>{this.setState({room})}} value={this.state.room} />           
+                    <View style={{justifyContent:'center'}}>
+                        <TouchableOpacity style={[styles.Button,{alignSelf:'center'}]} onPress={()=>this.handleEditRoom(this.state.room, this.state.room_id, this.state.Token)}>
+                            <Text style={[styles.labelButton,{textAlign:'center'}]}>Edit</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
 
             <Modal visible={this.state.modal_status}>
-                <View style={[styles.content,{bottom: 50}]}>
-                    <Text >Add Room</Text>
-                    <Text>Name</Text>
-                    <Input style={styles.Input} onChangeText={(room)=>{this.setState({room})}} value={this.state.room} />           
-                    <View style={{flexDirection:'row'}}>
-                        <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.setState({modal_status:false})}>
-                        <Text style={{textAlign:'center'}}>Cancel</Text>
+                <View style={styles.Card}>
+                <TouchableOpacity style={{backgroundColor:'red', borderRadius:100, width:35, height: 35}} onPress={()=>this.setState({modal_status:false})}>
+                            <Text style={[styles.labelButton,{textAlign:'center'}]}>X</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.handleAddRoom(this.state.room, this.state.Token)}>
-                            <Text style={{textAlign:'center'}}>Add</Text>
+                    <Text style={[styles.label, {textAlign:'center'}]}>Add Room</Text>
+                    <Text style={styles.label}>Name</Text>
+                    <Input style={styles.input} onChangeText={(room)=>{this.setState({room})}} value={this.state.room} />           
+                    <View style={{justifyContent:'center'}}>
+
+                        <TouchableOpacity style={[styles.Button,{alignSelf:'center'}]} onPress={()=>this.handleAddRoom(this.state.room, this.state.Token)}>
+                            <Text style={[styles.labelButton,{textAlign:'center'}]}>Add</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

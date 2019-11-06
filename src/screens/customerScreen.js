@@ -108,11 +108,11 @@ class customerScreen extends Component {
                                     
 
                                 }}>
-                                    <Image style={{left:-20, top: 10, borderWidth: 2, width: 70, height: 70, justifyContent:'center', borderRadius:100}} source={{uri: item.image}} />
+                                    <Image style={{left:-10, top: 10, borderWidth: 2, width: 70, height: 70, justifyContent:'center', borderRadius:100}} source={{uri: item.image}} />
                
                                     <View style={{ marginStart: 1}}>
                                         <Text style={styles.label}>
-                                            Identity Number :{item.identity_number}
+                                            Id Number     : {item.identity_number}
                                         </Text>
                                         <Text style={styles.label}>
                                             Name            :{item.name}
@@ -125,25 +125,30 @@ class customerScreen extends Component {
                         )
                     }}
                 />
-                <TouchableOpacity style={[styles.Button,{alignSelf:'center'}]} onPress={()=>this.setState({modal_status:true})}>
+                <TouchableOpacity style={[styles.Button,{alignSelf:'center'}]} onPress={()=>this.setState({
+                                                   modal_status:true,
+                                                   customer_id: 0,
+                                                   customer: ' ',
+                                                   id_card: '',
+                                                   phone: ''})}>
                     <Text style={[styles.labelButton,{alignSelf:'center'}]}>Add</Text>
                 </TouchableOpacity>
                    
 
                 <Modal visible={this.state.modal_edit_status}>
-                <View style={[styles.content,{bottom: 50, height: 280}]}>
-                    <Text style={{textAlign:'center'}}>Edit Customer</Text>
-                    <Text>Name</Text>
-                    <Input  style={styles.Input} onChangeText={(customer)=>{this.setState({customer})}} value={this.state.customer} />           
-                    <Text>Identity Number</Text>
-                    <Input  style={styles.Input} onChangeText={(id_card)=>{this.setState({id_card})}} value={this.state.id_card} />
-                    <Text>Phone Number</Text>
-                    <Input style={styles.Input} onChangeText={(phone)=>{this.setState({phone})}} value={this.state.phone} />
-                    <View style={{flexDirection:'row'}}>
-                        <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.setState({modal_edit_status:false})}>
-                            <Text style={{textAlign:'center'}}>Cancel</Text>
+                <View style={[styles.Card,{bottom: -25, height: 450}]}>
+                <TouchableOpacity style={{backgroundColor:'red', borderRadius:100, width:35, height: 35}} onPress={()=>this.setState({modal_edit_status:false})}>
+                            <Text style={[styles.labelButton,{textAlign:'center'}]}>X</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>{
+                    <Text style={[styles.label,{textAlign:'center'}]}>Edit Customer</Text>
+                    <Text style={styles.label}>Name</Text>
+                    <Input  style={styles.input} onChangeText={(customer)=>{this.setState({customer})}} value={this.state.customer} />           
+                    <Text style={styles.label}>Identity Number</Text>
+                    <Input  style={styles.input} onChangeText={(id_card)=>{this.setState({id_card})}} value={this.state.id_card} />
+                    <Text style={styles.label}>Phone Number</Text>
+                    <Input style={styles.input} onChangeText={(phone)=>{this.setState({phone})}} value={this.state.phone} />
+                    <View style={{justifyContent:'center'}}>
+                        <TouchableOpacity style={[styles.Button, {alignSelf:'center'}]} onPress={()=>{
                             const customer = {
                                 name: this.state.customer,
                                 identity_number: this.state.id_card,
@@ -152,33 +157,33 @@ class customerScreen extends Component {
                             this.handleEditCustomer(customer, this.state.customer_id, this.state.Token)
                             this.setState({modal_edit_status: false})
                             }}>
-                            <Text style={{textAlign:'center'}}>Edit</Text>
+                            <Text style={[styles.labelButton,{textAlign:'center'}]}>Edit</Text>
                         </TouchableOpacity>
                     </View>
                     </View>
                 </Modal>
 
                 <Modal visible={this.state.modal_status}>
-                <View style={[styles.content,{bottom: 50, height: 280}]}>
-                    <Text style={{textAlign:'center'}}>Add Customer</Text>
-                    <Text>Name</Text>
-                    <Input   style={styles.Input} onChangeText={(customer)=>{this.setState({customer})}} value={this.state.customer} />           
-                    <Text>Identity Number</Text>
-                    <Input   style={styles.Input} onChangeText={(id_card)=>{this.setState({id_card})}} value={this.state.id_card} />
-                    <Text>Phone Number</Text>
-                    <Input  style={styles.Input} onChangeText={(phone)=>{this.setState({phone})}} value={this.state.phone} />
-                    <View style={{flexDirection:'row'}}>
-                        <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>this.setState({modal_status:false})}>
-                            <Text style={{textAlign:'center'}}>Cancel</Text>
+                <View style={[styles.Card,{bottom: -25, height: 450}]}>
+                <TouchableOpacity style={{backgroundColor:'red', borderRadius:100, width:35, height: 35}} onPress={()=>this.setState({modal_status:false})}>
+                            <Text style={[styles.labelButton,{textAlign:'center'}]}>X</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{width:100, height: 25, borderWidth:2, alignSelf:'center'}} onPress={()=>{
+                    <Text style={[styles.label,{textAlign:'center'}]}>Add Customer</Text>
+                    <Text style={styles.label}>Name</Text>
+                    <Input   style={styles.input} onChangeText={(customer)=>{this.setState({customer})}} value={this.state.customer} />           
+                    <Text style ={styles.label}>Identity Number</Text>
+                    <Input   style={styles.input} onChangeText={(id_card)=>{this.setState({id_card})}} value={this.state.id_card} />
+                    <Text style={styles.label}>Phone Number</Text>
+                    <Input  style={styles.input} onChangeText={(phone)=>{this.setState({phone})}} value={this.state.phone} />
+                    <View style={{justifyContent:'center'}}>
+                        <TouchableOpacity style={[styles.Button, {alignSelf:'center'}]} onPress={()=>{
                             const customer = {
                                 name: this.state.customer,
                                 identity_number: this.state.id_card,
                                 phone_number: this.state.phone
                             }
                             this.handleAddCustomer(customer, this.state.Token)}}>
-                            <Text style={{textAlign:'center'}}>Add</Text>
+                            <Text style={[styles.labelButton,{textAlign:'center'}]}>Add</Text>
                         </TouchableOpacity>
                     </View>
                     </View>

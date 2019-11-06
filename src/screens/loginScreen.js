@@ -53,12 +53,15 @@ class loginScreen extends Component {
                 console.log(response)
                 if(typeof response.data.token !== 'undefined'){
                     AsyncStorage.setItem('uToken', response.data.token)
-                    console.log(response.data.token)
+                    AsyncStorage.setItem('userName', response.data.username)
+                    console.log(response)
                     this.props.navigation.navigate('Customer')
+                }else{
+                    alert(response.data.message)
                 }
             })
         }catch(e){
-            console.log(e)
+            console.log()
         }
     }
 

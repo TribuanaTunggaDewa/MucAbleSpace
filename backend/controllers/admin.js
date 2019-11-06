@@ -5,7 +5,8 @@ const admin = models.admins
 
 exports.login = (req, res) => {
     console.log(req.body)
-    admin.findOne({attributes:['username']},{
+    admin.findOne({
+        attributes:['username'],
         where:{
             username: req.body.username,
             password: req.body.password
